@@ -1,0 +1,166 @@
+{
+ "w01.bin": {
+  "L": 16,
+  "decoded_sha256": "2dc99c61a849de8e22368d769e684038d60dd4fddbdcd7afe7a89efcae065e31",
+  "n_real": [
+   16
+  ],
+  "widths": [
+   1,
+   1,
+   1
+  ]
+ },
+ "w02.bin": {
+  "L": 16,
+  "decoded_sha256": "1977f4721336bb993237e6302fab89cc739a5fc58ae10a66b9a5dccc0f99017e",
+  "n_real": [
+   16
+  ],
+  "widths": [
+   2,
+   2,
+   2
+  ]
+ },
+ "w03.bin": {
+  "L": 16,
+  "decoded_sha256": "50956b7f457c9b2babf7e8fa8c429b685bc0841836a206fe10fcb1a0e3f93ef5",
+  "n_real": [
+   16
+  ],
+  "widths": [
+   3,
+   3,
+   3
+  ]
+ },
+ "w04.bin": {
+  "L": 16,
+  "decoded_sha256": "c20b3f67b67aa1c1f4c795a4075b7a2f41a6bf57de49b73499085d7e56dc127c",
+  "n_real": [
+   16
+  ],
+  "widths": [
+   4,
+   4,
+   4
+  ]
+ },
+ "w05.bin": {
+  "L": 16,
+  "decoded_sha256": "4f16abb2474f9728d552806a0f0398acc75286a7497a1047ed5aea64712abc41",
+  "n_real": [
+   16
+  ],
+  "widths": [
+   5,
+   5,
+   5
+  ]
+ },
+ "w06.bin": {
+  "L": 16,
+  "decoded_sha256": "a86276aa9e91e1c28eb620b80ba3138f016c0a6927b03bb9c3d7a291306946e6",
+  "n_real": [
+   16
+  ],
+  "widths": [
+   6,
+   6,
+   6
+  ]
+ },
+ "w07.bin": {
+  "L": 16,
+  "decoded_sha256": "1a19dfcbba59d78977d6634fe117b3d760efab707fcd564605bcf121dd31cdc0",
+  "n_real": [
+   16
+  ],
+  "widths": [
+   7,
+   7,
+   7
+  ]
+ },
+ "w14.bin": {
+  "L": 16,
+  "decoded_sha256": "c76249a83a01d301b1447af618a17ab3df248bb7251a9cdf3b2ee8bfb251ab5e",
+  "n_real": [
+   16
+  ],
+  "widths": [
+   14,
+   14,
+   14
+  ]
+ },
+ "w15.bin": {
+  "L": 16,
+  "decoded_sha256": "0c3263382a2f8c37dc486d4d9011422ec5c1fe642ec06cffe82219a2f313c5d6",
+  "n_real": [
+   16
+  ],
+  "widths": [
+   15,
+   15,
+   15
+  ]
+ },
+ "w16.bin": {
+  "L": 16,
+  "decoded_sha256": "bfd5ffe5e97fe524068aa9802f913ec336565ddc343ded7d397c8c16d978a870",
+  "n_real": [
+   16
+  ],
+  "widths": [
+   16,
+   16,
+   16
+  ]
+ },
+ "wrap.bin": {
+  "L": 8,
+  "decoded": [
+   [
+    32600,
+    -32636,
+    -32169,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  ],
+  "decoded_sha256": "b2c01f8ba252bfe2777bd607c4ac0e49d0543db23f5b3a7901a9c849b2614ecb",
+  "n_real": [
+   3
+  ],
+  "widths": [
+   10,
+   0,
+   0
+  ]
+ }
+}

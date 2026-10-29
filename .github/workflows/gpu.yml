@@ -1,0 +1,18 @@
+name: Native GPU release gates
+on: workflow_dispatch
+jobs:
+  correctness:
+    strategy:
+      matrix:
+        include:
+          - runner: cuda12-volta
+            arch: "70"
+          - runner: cuda13-blackwell
+            arch: "120"
+    runs-on: [self-hosted, linux, "${{ matrix.runner }}"]
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 -m venv .venv
+      - run: .venv/bin/python -m pip install '.[web]' pytest psutil httpx "pytest-xdist>=3.8" "filelock>=3.13" --config-settings=cmake.define.ROSHAMBO3_CUDA=ON --config-settings=cmake.define.CMAKE_CUDA_ARCHITECTURES=${{ matrix.arch }}
+      - run: .venv/bin/python -c 'import roshambo3; from roshambo3.backend import cuda; assert cuda.available(); print(roshambo3.get_build_info())'
+      - run: .venv/bin/python -m pytest tests

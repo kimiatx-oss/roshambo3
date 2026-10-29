@@ -1,0 +1,174 @@
+name: Source release checks
+on: [push, pull_request]
+jobs:
+  cpu:
+    strategy:
+      matrix:
+        os: [ubuntu-24.04, ubuntu-24.04-arm, macos-15]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11"}
+      - if: runner.os == 'macOS'
+        run: python -c "import platform; assert platform.machine() == 'arm64'"
+      # The AVX2+FMA kernels and their fixtures skip on hosts without them. The
+      # x86 leg is where they are covered, so it fails rather than passing by skipping.
+      - if: matrix.os == 'ubuntu-24.04'
+        run: |
+          grep -qw avx2 /proc/cpuinfo && grep -qw fma /proc/cpuinfo || {
+            echo "runner lacks AVX2/FMA; the x86 SIMD paths would go untested"
+            grep -m1 "model name" /proc/cpuinfo; exit 1; }
+      - run: python -m pip install build scikit-build-core pybind11
+      - run: python -m build --sdist --wheel --no-isolation --config-setting=cmake.define.ROSHAMBO3_CUDA=OFF --config-setting=cmake.define.ROSHAMBO3_METAL=OFF
+      - run: |
+          sdists=(dist/*.tar.gz)
+          python -m pip install "${sdists[0]}[web]" pytest psutil httpx "pytest-xdist>=3.8" "filelock>=3.13" --config-settings=cmake.define.ROSHAMBO3_CUDA=OFF --config-settings=cmake.define.ROSHAMBO3_METAL=OFF
+      - if: matrix.os == 'ubuntu-24.04-arm'
+        run: |
+          python - <<'PY'
+          from roshambo3.format.r3g import native
+          isas = native.compiled_isas()
+          assert "scalar" in isas and "neon" in isas, isas
+          native.force_isa("neon")
+          assert native.isa() == "neon", native.isa()
+          native.force_isa("scalar")
+          print("Linux arm64 format-3 ISAs:", isas)
+          PY
+      - run: python -m pytest tests
+      - run: python -m pip install --force-reinstall --no-deps dist/*.whl
+      - run: python -m pytest tests/test_cpu_platform.py tests/test_public_cpu_screen_session.py
+      - run: python examples/make_demo.py --out demo
+      - run: roshambo3 prepare demo/library.sdf -o demo/corpus --workers 1
+      - uses: actions/upload-artifact@v4
+        with: {name: "sdist-${{ matrix.os }}", path: "dist/*.tar.gz"}
+  web:
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: "22"}
+      - run: npm ci
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npm test
+
+  cpu-sanitized:
+    name: sanitized format-3 CPU extension
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - name: install address/undefined-sanitized CPU extension
+        run: |
+          python -m pip install --upgrade pip
+          pip install ".[web]" pytest pybind11 psutil httpx "pytest-xdist>=3.8" "filelock>=3.13" \
+            --config-settings=cmake.define.ROSHAMBO3_CUDA=OFF \
+            --config-settings=cmake.define.ROSHAMBO3_SANITIZE=address,undefined
+      - name: assert sanitizer flags are in the CPU extension
+        run: |
+          export LD_PRELOAD="$(gcc -print-file-name=libasan.so):$(g++ -print-file-name=libstdc++.so)"
+          export ASAN_OPTIONS="detect_leaks=0:abort_on_error=1:print_stacktrace=1"
+          export UBSAN_OPTIONS="halt_on_error=1:print_stacktrace=1"
+          python - <<'PY'
+          from roshambo3 import _roshambo3_cpu as cpu
+          flags = cpu.__cxx_flags__
+          assert "-fsanitize=address,undefined" in flags, flags
+          assert "-fno-omit-frame-pointer" in flags, flags
+          print("Sanitized CPU extension flags:", flags)
+          PY
+      - name: pytest format-3 seeds and conformance under ASan/UBSan
+        run: |
+          export LD_PRELOAD="$(gcc -print-file-name=libasan.so):$(g++ -print-file-name=libstdc++.so)"
+          export ASAN_OPTIONS="detect_leaks=0:abort_on_error=1:print_stacktrace=1"
+          export UBSAN_OPTIONS="halt_on_error=1:print_stacktrace=1"
+          # GCC ASan on ARM traps in CPython's vfork child path. Keep the
+          # sanitizer loaded while using fork+exec for test subprocesses.
+          python - <<'PY'
+          import glob
+          import subprocess
+          import pytest
+          subprocess._USE_VFORK = False
+          paths = sorted(glob.glob("tests/test_format3_*.py"))
+          raise SystemExit(pytest.main(paths))
+          PY
+
+  format3-fuzz-smoke:
+    name: format-3 bounded fuzz smoke
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - name: install clang and CPU extension with Atheris
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes clang
+          python -m pip install --upgrade pip
+          pip install -e . atheris \
+            --config-settings=cmake.define.ROSHAMBO3_CUDA=OFF
+      - name: require AVX2 and FMA for the standalone SIMD harness
+        run: |
+          grep -qw avx2 /proc/cpuinfo && grep -qw fma /proc/cpuinfo || {
+            echo "runner lacks AVX2/FMA required by the standalone harness"
+            grep -m1 "model name" /proc/cpuinfo; exit 1; }
+      - name: prepare evidence directories and reusable seed corpora
+        run: |
+          mkdir -p fuzz-artifacts/native/crashes fuzz-artifacts/python-corpus/crashes fuzz-artifacts/definition/crashes
+          python tests/format3_native_cases.py write "$RUNNER_TEMP/r3g-native-seeds"
+          python tests/fuzz/python_corpus_fuzzer.py --write-seeds "$RUNNER_TEMP/r3g-python-seeds"
+          python tests/fuzz/definition_fuzzer.py --write-seeds "$RUNNER_TEMP/r3g-definition-seeds"
+          cp -a "$RUNNER_TEMP/r3g-native-seeds" fuzz-artifacts/native/seeds
+          cp -a "$RUNNER_TEMP/r3g-python-seeds" fuzz-artifacts/python-corpus/seeds
+          cp -a "$RUNNER_TEMP/r3g-definition-seeds" fuzz-artifacts/definition/seeds
+      - name: build native libFuzzer target
+        run: |
+          set -o pipefail
+          CPU_SRC=src/roshambo3/backend/_cpu_src
+          clang++ -std=c++17 -O1 -g -march=x86-64-v3 \
+            -fsanitize=fuzzer,address,undefined -fno-sanitize-recover=all \
+            -fno-omit-frame-pointer -I "$CPU_SRC" \
+            tests/fuzz/r3g_libfuzzer.cpp \
+            "$CPU_SRC/r3g_codec.cpp" "$CPU_SRC/r3g_unpack_scalar.cpp" \
+            "$CPU_SRC/r3g_encode.cpp" "$CPU_SRC/r3g_unpack_avx2.cpp" \
+            -o "$RUNNER_TEMP/r3g_libfuzzer" 2>&1 | tee fuzz-artifacts/native/build.log
+      - name: run native codec target for 60 seconds
+        run: |
+          set -o pipefail
+          "$RUNNER_TEMP/r3g_libfuzzer" "$RUNNER_TEMP/r3g-native-seeds" \
+            -max_total_time=60 -max_len=1048576 \
+            -artifact_prefix="$PWD/fuzz-artifacts/native/crashes/" \
+            -print_final_stats=1 2>&1 | tee fuzz-artifacts/native/run.log
+          grep -Eq 'cov: [1-9][0-9]*' fuzz-artifacts/native/run.log
+      - name: run corpus reader Atheris target for 60 seconds
+        env:
+          ROSHAMBO3_FUZZ_TIMINGS: fuzz-artifacts/python-corpus/timings.jsonl
+        run: |
+          set -o pipefail
+          python tests/fuzz/python_corpus_fuzzer.py "$RUNNER_TEMP/r3g-python-seeds" \
+            -max_total_time=60 -max_len=4096 \
+            -artifact_prefix="$PWD/fuzz-artifacts/python-corpus/crashes/" \
+            -print_final_stats=1 2>&1 | tee fuzz-artifacts/python-corpus/run.log
+          grep -Eq 'cov: [1-9][0-9]*' fuzz-artifacts/python-corpus/run.log
+      - name: run definition pre-pass Atheris target for 60 seconds
+        env:
+          ROSHAMBO3_DEFINITION_FUZZ_TIMINGS: fuzz-artifacts/definition/timings.jsonl
+        run: |
+          set -o pipefail
+          python tests/fuzz/definition_fuzzer.py "$RUNNER_TEMP/r3g-definition-seeds" \
+            -max_total_time=60 -max_len=4096 \
+            -artifact_prefix="$PWD/fuzz-artifacts/definition/crashes/" \
+            -print_final_stats=1 2>&1 | tee fuzz-artifacts/definition/run.log
+          grep -Eq 'cov: [1-9][0-9]*' fuzz-artifacts/definition/run.log
+      - name: upload fuzz inputs, logs, and sanitizer artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: format3-fuzz-smoke
+          path: fuzz-artifacts/
+          if-no-files-found: warn

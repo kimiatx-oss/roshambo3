@@ -1,0 +1,2 @@
+# Preserve upstream shader strings in generated browser bundles verbatim.
+src/roshambo3/web/static/assets/* linguist-generated=true whitespace=-blank-at-eol

@@ -1,0 +1,22 @@
+# Paths resolve relative to this file. Use read-only references to shared corpora.
+[server]
+jobs = "./jobs"
+backend = "cuda" # "cpu" and experimental "metal" also support all three modes
+device = 0
+# metal_field_sampler = "manual" # omit to inherit texture16; "texture32" needs M3+
+# cpu_workers = 4
+# cpu_qos = "inherit"
+# cpu_memory_budget_bytes = 4294967296
+# cpu_topk_state_budget_bytes = 268435456
+max_k = 10000
+max_conformers = 50
+upload_bytes = 10485760
+retention_days = 7
+job_timeout_s = 86400
+cancel_timeout_s = 15
+
+[[databases]]
+id = "library"
+name = "Screening library"
+description = "Prepared molecular conformers"
+path = "/var/lib/roshambo3/corpora/library"

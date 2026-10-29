@@ -1,0 +1,26 @@
+{
+  "color_contract": {
+    "public_source": {
+      "url": "https://www.ebi.ac.uk/chembl/api/data/molecule/CHEMBL516753.json",
+      "accession": "CHEMBL516753",
+      "source_sha256": "0997b971d010a97fe5c69bc9ad89f8a4ba359db795f710665d3137b4a0be4284",
+      "fixture_source_verified": true,
+      "conformers_verified": 10
+    },
+    "metadata_redaction": "local path replaced; numerical arrays unchanged"
+  },
+  "color_field": {
+    "derived_from": "color_contract_fixture.npz; analytic reference and synthetic cases",
+    "numerical_arrays_unchanged": true
+  },
+  "golden_scores": {
+    "generator": "bench/make_golden.py",
+    "seed": 20260821,
+    "synthetic": true
+  },
+  "anchor": {
+    "generator": "CPU reference anchor (the record embedded in anchor_fixture.npz)",
+    "public_source": "PubChem3D: coordinates are real conformers from D3-EVAL-10M, a hash sample of PubChem3D (group 5; fixture seed 20260903)",
+    "synthetic": false
+  }
+}

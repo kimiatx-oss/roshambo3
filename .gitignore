@@ -1,0 +1,57 @@
+# Build
+build/
+.build-*/
+dist/
+*.egg-info/
+_skbuild/
+*.so
+*.o
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.venv-macos/
+.pytest_cache/
+.ruff_cache/
+
+# Editors
+.vscode/
+.idea/
+
+# ---------------------------------------------------------------------------
+# Bulk data never belongs in the repo. Corpora live once at
+# $ROSHAMBO3_CORPORA and are referenced by absolute path or a
+# read-only symlink; a copied corpus can run to tens of gigabytes.
+#
+# Scoped to the top of the working tree only, so test fixtures under tests/data
+# are not caught.
+# ---------------------------------------------------------------------------
+/*.rsb3
+/*.h5
+/*.npz
+/src/**/*.rsb3
+/src/**/*.h5
+/bench/**/*.rsb3
+/bench/**/*.h5
+/doc/**/*.h5
+
+# Scratch
+/scratch/
+/wt/
+
+# Web development and runtime data (production static assets are committed)
+/web/node_modules/
+/web/test-results/
+/web/playwright-report/
+/jobs/
+
+# Local demo corpora and uploaded web jobs are runtime data.
+/demo/
+/web/jobs/
+
+# Local Apple benchmark outputs remain outside the released tool history.
+/results/apple-silicon/
+
+# Benchmark captures are external to the tool/source release.
+/results/metal/

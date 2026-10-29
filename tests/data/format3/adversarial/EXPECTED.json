@@ -1,0 +1,569 @@
+{
+ "L_field_width_wrong": {
+  "code": "layout.widths",
+  "generated": false,
+  "threat_model": "2.2 widths (bucket-wide)",
+  "tier": "scan"
+ },
+ "block_hash_mismatch": {
+  "code": "integrity.block_hash",
+  "generated": false,
+  "threat_model": "3 P1: block hashes",
+  "tier": "deep"
+ },
+ "block_length_short": {
+  "code": "limit.block_length",
+  "generated": false,
+  "threat_model": "2.2 more bits than the stream holds",
+  "tier": "scan"
+ },
+ "block_molecule_gap": {
+  "code": "layout.blocks",
+  "generated": false,
+  "native_code": "layout.runs",
+  "threat_model": "2.2 molecule ranges do not tile",
+  "tier": "open"
+ },
+ "block_reserved_nonzero": {
+  "code": "layout.block_header",
+  "generated": false,
+  "threat_model": "2.2 codec params",
+  "tier": "scan"
+ },
+ "block_rows_4097": {
+  "code": "limit.block_rows",
+  "generated": true,
+  "threat_model": "2.2 block rows over the cap",
+  "tier": "open"
+ },
+ "block_rows_mismatch": {
+  "code": "layout.runs",
+  "generated": false,
+  "threat_model": "2.2 run sums wrong",
+  "tier": "scan"
+ },
+ "chained_star_18": {
+  "code": "limit.definition_atoms",
+  "generated": false,
+  "threat_model": "2.1 / appendix: 18 chained * atoms",
+  "tier": "scan"
+ },
+ "color_self_nan": {
+  "code": "value.self_overlap",
+  "generated": false,
+  "threat_model": "3 scan: self-overlaps finite",
+  "tier": "scan"
+ },
+ "color_self_noncanonical": {
+  "code": "layout.sections",
+  "generated": false,
+  "threat_model": "FORMAT.md 18.2: color_self only with canonical matrices",
+  "tier": "open"
+ },
+ "corpus_json_is_fifo": {
+  "code": "io.not_regular_file",
+  "generated": true,
+  "threat_model": "review S2: a FIFO must not hang open()",
+  "tier": "open"
+ },
+ "definition_any_atom_chain": {
+  "code": "limit.definition_atoms",
+  "generated": false,
+  "threat_model": "cold read 2 A20: A/a primitives count as atoms",
+  "tier": "scan"
+ },
+ "definition_branch_depth": {
+  "code": "limit.definition_depth",
+  "generated": false,
+  "threat_model": "review 2: branch inside a bracket inside a recursion hid the depth",
+  "tier": "scan"
+ },
+ "definition_continuation_star": {
+  "code": "value.definition",
+  "generated": false,
+  "threat_model": "review S1: backslash-continued 18-star chain",
+  "tier": "scan"
+ },
+ "definition_cr": {
+  "code": "value.definition",
+  "generated": false,
+  "threat_model": "FORMAT.md 10.3: no carriage return",
+  "tier": "scan"
+ },
+ "definition_lowercase_bomb": {
+  "code": "limit.definition_depth",
+  "generated": false,
+  "threat_model": "review S1: lowercase keyword macro bomb",
+  "tier": "scan"
+ },
+ "definition_lowercase_star": {
+  "code": "limit.definition_atoms",
+  "generated": false,
+  "threat_model": "review S1: lowercase definefeature 18-star chain",
+  "tier": "scan"
+ },
+ "definition_macro_depth": {
+  "code": "limit.definition_depth",
+  "generated": false,
+  "threat_model": "review S1: RDKit's $([...]) wrapping counts toward depth",
+  "tier": "scan"
+ },
+ "definition_negation_bomb": {
+  "code": "limit.definition_depth",
+  "generated": false,
+  "threat_model": "review S1: !Name negation bomb",
+  "tier": "scan"
+ },
+ "definition_oversize": {
+  "code": "json.string_length",
+  "generated": true,
+  "threat_model": "3 P0: definition text 64 KiB (caught by the JSON string limit)",
+  "tier": "open"
+ },
+ "definition_oversize_prepass": {
+  "code": "limit.definition_size",
+  "generated": true,
+  "threat_model": "3 P0: the pre-pass's own size limit, exercised directly",
+  "tier": "scan"
+ },
+ "definition_stray_line": {
+  "code": "value.definition",
+  "generated": false,
+  "threat_model": "review S1: closed grammar",
+  "tier": "scan"
+ },
+ "definition_triple_bond_chain": {
+  "code": "limit.definition_atoms",
+  "generated": false,
+  "threat_model": "cold read 2 A8: # outside brackets is the triple bond, not a comment",
+  "tier": "scan"
+ },
+ "definition_type_without_family": {
+  "code": "value.definition",
+  "generated": false,
+  "threat_model": "FORMAT.md 10.2: every type is a Family of the definition",
+  "tier": "scan"
+ },
+ "definition_undefined_macro": {
+  "code": "value.definition",
+  "generated": false,
+  "threat_model": "2.1 fdef parser",
+  "tier": "scan"
+ },
+ "descriptor_major_4": {
+  "code": "prologue.major_version",
+  "generated": false,
+  "threat_model": "2.3 unknown major version (descriptor)",
+  "tier": "open"
+ },
+ "duplicate_mol_id_across_groups": {
+  "code": "layout.runs",
+  "generated": false,
+  "threat_model": "FORMAT.md 7 rule 2: mol_id unique across the corpus",
+  "tier": "scan"
+ },
+ "empty_group": {
+  "code": "schema.value",
+  "generated": false,
+  "threat_model": "FORMAT.md 9.3: an empty group is invalid",
+  "tier": "open"
+ },
+ "encoding_unknown": {
+  "code": "schema.type",
+  "generated": false,
+  "threat_model": "3 P0: selectors are closed enumerations",
+  "tier": "open"
+ },
+ "ext_id_control": {
+  "code": "limit.ext_id",
+  "generated": false,
+  "threat_model": "2.3 strings: control characters",
+  "tier": "scan"
+ },
+ "feature_atom_out_of_range": {
+  "code": "layout.features",
+  "generated": false,
+  "threat_model": "2.2 atom index >= n_real",
+  "tier": "scan"
+ },
+ "feature_offsets_bad": {
+  "code": "layout.features",
+  "generated": false,
+  "threat_model": "2.2 feature offsets not a valid CSR",
+  "tier": "scan"
+ },
+ "feature_prefix_reversed": {
+  "code": "layout.features",
+  "generated": false,
+  "threat_model": "section 8.1: prefix tuple must sort first",
+  "tier": "scan"
+ },
+ "feature_too_many_atoms": {
+  "code": "limit.atoms_per_feature",
+  "generated": true,
+  "threat_model": "2.2 atoms per centroid: huge",
+  "tier": "scan"
+ },
+ "feature_type_out_of_range": {
+  "code": "layout.features",
+  "generated": false,
+  "threat_model": "2.2 feature type not in [1, n_types]",
+  "tier": "scan"
+ },
+ "feature_zero_atoms": {
+  "code": "layout.features",
+  "generated": false,
+  "threat_model": "2.2 atoms per centroid: 0",
+  "tier": "scan"
+ },
+ "features_256": {
+  "code": "limit.features_per_molecule",
+  "generated": true,
+  "threat_model": "2.2 per-type counts overflow u8",
+  "tier": "scan"
+ },
+ "features_unsorted": {
+  "code": "layout.features",
+  "generated": false,
+  "threat_model": "FORMAT.md 8.1 rule 4",
+  "tier": "scan"
+ },
+ "fingerprint_mismatch": {
+  "code": "integrity.fingerprint",
+  "generated": false,
+  "threat_model": "T281 design point 2: separated group file",
+  "tier": "open"
+ },
+ "group_index_string": {
+  "code": "schema.type",
+  "generated": false,
+  "threat_model": "2.3 paths: a non-integer group index",
+  "tier": "open"
+ },
+ "group_is_fifo": {
+  "code": "io.not_regular_file",
+  "generated": true,
+  "threat_model": "review S2: a FIFO must not hang open()",
+  "tier": "open"
+ },
+ "group_path_entry": {
+  "code": "schema.unknown_key",
+  "generated": false,
+  "threat_model": "2.3 paths: a path-like group entry",
+  "tier": "open"
+ },
+ "group_symlink_escapes_root": {
+  "code": "io.not_regular_file",
+  "generated": true,
+  "threat_model": "2.3 paths: symlink out of the root",
+  "tier": "open"
+ },
+ "groups_dir_symlink": {
+  "code": "io.not_regular_file",
+  "generated": true,
+  "threat_model": "review 2: groups/ is a symlink (dir-fd opens)",
+  "tier": "open"
+ },
+ "hac_mismatch": {
+  "code": "limit.hac",
+  "generated": false,
+  "threat_model": "FORMAT.md 11: hac == n_real",
+  "tier": "scan"
+ },
+ "header_hash_mismatch": {
+  "code": "integrity.header_hash",
+  "generated": false,
+  "threat_model": "3 P1: header hashes",
+  "tier": "open"
+ },
+ "ids_hash_mismatch": {
+  "code": "integrity.ids_hash",
+  "generated": false,
+  "threat_model": "T293 scope 10: ids_sha256",
+  "tier": "deep"
+ },
+ "json_depth": {
+  "code": "json.depth",
+  "generated": false,
+  "threat_model": "2.3 JSON: deep nesting",
+  "tier": "open"
+ },
+ "json_duplicate_key": {
+  "code": "json.duplicate_key",
+  "generated": false,
+  "threat_model": "2.3 JSON: duplicate keys",
+  "tier": "open"
+ },
+ "json_nan": {
+  "code": "json.nan",
+  "generated": false,
+  "threat_model": "2.3 JSON: NaN",
+  "tier": "open"
+ },
+ "macro_bomb": {
+  "code": "limit.definition_depth",
+  "generated": false,
+  "threat_model": "2.1 / appendix: AtomType macro bomb (RDKit's $([...]) wrapping reaches depth 9 at level 9, before the size limit)",
+  "tier": "scan"
+ },
+ "magic_rsb3": {
+  "code": "prologue.magic",
+  "generated": false,
+  "threat_model": "2.3 containers: magic/version",
+  "tier": "open"
+ },
+ "major_version_4": {
+  "code": "prologue.major_version",
+  "generated": false,
+  "threat_model": "2.3 unknown major version (prologue)",
+  "tier": "open"
+ },
+ "matrix_negative_width": {
+  "code": "value.matrix",
+  "generated": false,
+  "threat_model": "2.5 matrices: finite, >= 0",
+  "tier": "open"
+ },
+ "mol_id_2_63": {
+  "code": "limit.mol_id",
+  "generated": false,
+  "threat_model": "T293 scope 10: mol_id range",
+  "tier": "scan"
+ },
+ "n_color_exceeds_L": {
+  "code": "layout.widths",
+  "generated": false,
+  "threat_model": "2.2 n_real + sum(color) > device L",
+  "tier": "scan"
+ },
+ "n_conf_zero": {
+  "code": "limit.n_conf_per_molecule",
+  "generated": false,
+  "threat_model": "2.2 molecule runs: n_conf = 0",
+  "tier": "scan"
+ },
+ "n_real_exceeds_L_heavy": {
+  "code": "layout.widths",
+  "generated": false,
+  "threat_model": "2.2 n_real > L_heavy",
+  "tier": "scan"
+ },
+ "n_real_zero": {
+  "code": "limit.n_real",
+  "generated": false,
+  "threat_model": "2.2 n_real out of range",
+  "tier": "scan"
+ },
+ "n_types_7": {
+  "code": "limit.n_types",
+  "generated": true,
+  "threat_model": "2.4 resource exhaustion: n_types",
+  "tier": "open"
+ },
+ "nested_smarts": {
+  "code": "limit.definition_depth",
+  "generated": false,
+  "threat_model": "2.1 / appendix: nested $( SMARTS",
+  "tier": "scan"
+ },
+ "oversize_header": {
+  "code": "json.size",
+  "generated": true,
+  "threat_model": "2.3 JSON: uncapped header read",
+  "tier": "open"
+ },
+ "parquet_dictionary": {
+  "code": "value.parquet",
+  "generated": false,
+  "threat_model": "2.3 Parquet: PLAIN only, bytes on disk bound memory",
+  "tier": "scan"
+ },
+ "parquet_footer_oversize": {
+  "code": "value.parquet",
+  "generated": true,
+  "threat_model": "review 2: footer length bounded before the footer is parsed",
+  "tier": "scan"
+ },
+ "parquet_hash_mismatch": {
+  "code": "integrity.molecules_hash",
+  "generated": false,
+  "threat_model": "FORMAT.md 10.7: molecules_sha256",
+  "tier": "scan"
+ },
+ "parquet_nullable": {
+  "code": "value.parquet",
+  "generated": false,
+  "threat_model": "FORMAT.md 11: non-null columns",
+  "tier": "scan"
+ },
+ "parquet_page_bool_list": {
+  "code": "value.parquet",
+  "generated": false,
+  "threat_model": "review 2: page header with a list of 2^62 bools (thrift skip loop)",
+  "tier": "scan"
+ },
+ "parquet_page_encoding_dictionary": {
+  "code": "value.parquet",
+  "generated": false,
+  "threat_model": "review 2: footer honest, page header encoding RLE_DICTIONARY",
+  "tier": "scan"
+ },
+ "parquet_page_size_mismatch": {
+  "code": "value.parquet",
+  "generated": false,
+  "threat_model": "review 2: footer honest, page header sizes differ (compressed page)",
+  "tier": "scan"
+ },
+ "parquet_page_type_dictionary": {
+  "code": "value.parquet",
+  "generated": false,
+  "threat_model": "review 2: footer honest, page header says DICTIONARY_PAGE",
+  "tier": "scan"
+ },
+ "parquet_row_count": {
+  "code": "value.parquet",
+  "generated": false,
+  "threat_model": "3 scan: parquet row count equals n_mol",
+  "tier": "scan"
+ },
+ "parquet_schema": {
+  "code": "value.parquet",
+  "generated": false,
+  "threat_model": "2.3 Parquet: schema checked before data",
+  "tier": "scan"
+ },
+ "parquet_set_mismatch": {
+  "code": "value.parquet",
+  "generated": false,
+  "threat_model": "3 scan: parquet mol_id set equals the run tables",
+  "tier": "scan"
+ },
+ "parquet_unsupported_codec": {
+  "code": "value.parquet",
+  "generated": false,
+  "threat_model": "section 11: unsupported compression codec",
+  "tier": "scan"
+ },
+ "reserved_prologue_nonzero": {
+  "code": "prologue.reserved",
+  "generated": false,
+  "threat_model": "2.3 containers",
+  "tier": "open"
+ },
+ "runs_unsorted": {
+  "code": "layout.runs",
+  "generated": false,
+  "threat_model": "2.2 molecule runs (order)",
+  "tier": "scan"
+ },
+ "section_hash_mismatch": {
+  "code": "integrity.section_hash",
+  "generated": false,
+  "threat_model": "3 P1: section hashes",
+  "tier": "deep"
+ },
+ "section_length_mismatch": {
+  "code": "layout.sections",
+  "generated": false,
+  "threat_model": "2.2 len != prod(shape)*size",
+  "tier": "open"
+ },
+ "section_misaligned": {
+  "code": "layout.sections",
+  "generated": false,
+  "native_code": "layout.blocks",
+  "threat_model": "2.2 unaligned section",
+  "tier": "open"
+ },
+ "section_outside_file": {
+  "code": "layout.sections",
+  "generated": false,
+  "threat_model": "2.2 section offset outside the file",
+  "tier": "open"
+ },
+ "section_overlap": {
+  "code": "layout.sections",
+  "generated": false,
+  "native_code": "layout.blocks",
+  "threat_model": "2.2 overlapping sections",
+  "tier": "open"
+ },
+ "section_unknown": {
+  "code": "schema.type",
+  "generated": false,
+  "threat_model": "3 P0: closed enumerations",
+  "tier": "open"
+ },
+ "single_molecule_4097_rows": {
+  "code": "limit.block_rows",
+  "generated": true,
+  "threat_model": "FORMAT.md 6 rule 4: single-molecule cap",
+  "tier": "open"
+ },
+ "smarts_list_missing_family": {
+  "code": "value.definition",
+  "generated": false,
+  "threat_model": "FORMAT.md 15: every type has patterns",
+  "tier": "scan"
+ },
+ "smarts_list_nested": {
+  "code": "limit.definition_depth",
+  "generated": false,
+  "threat_model": "FORMAT.md 15: smarts_list recursion depth",
+  "tier": "scan"
+ },
+ "smarts_list_not_object": {
+  "code": "schema.type",
+  "generated": false,
+  "threat_model": "FORMAT.md 10.2: smarts_list definition is an object",
+  "tier": "open"
+ },
+ "smarts_list_star_chain": {
+  "code": "limit.definition_atoms",
+  "generated": false,
+  "threat_model": "FORMAT.md 15: smarts_list top-level atoms",
+  "tier": "scan"
+ },
+ "smarts_list_too_many": {
+  "code": "limit.definition_patterns",
+  "generated": false,
+  "threat_model": "FORMAT.md 15: smarts_list pattern count",
+  "tier": "scan"
+ },
+ "smiles_cx": {
+  "code": "limit.smiles",
+  "generated": false,
+  "threat_model": "2.3 strings: CXSMILES",
+  "tier": "scan"
+ },
+ "smiles_too_long": {
+  "code": "limit.smiles",
+  "generated": true,
+  "threat_model": "2.3 strings: SMILES length",
+  "tier": "scan"
+ },
+ "step_wrong": {
+  "code": "schema.value",
+  "generated": false,
+  "threat_model": "3 P0: closed schema",
+  "tier": "open"
+ },
+ "truncated_file": {
+  "code": "prologue.header_offset",
+  "generated": false,
+  "threat_model": "2.3 header extent (truncation)",
+  "tier": "open"
+ },
+ "vaa_negative": {
+  "code": "value.self_overlap",
+  "generated": false,
+  "threat_model": "3 scan: self-overlaps finite and > 0",
+  "tier": "scan"
+ },
+ "width_17": {
+  "code": "limit.bit_width",
+  "generated": false,
+  "threat_model": "2.2 bit width > 16",
+  "tier": "scan"
+ }
+}

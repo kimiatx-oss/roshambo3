@@ -1,0 +1,1 @@
+{"definition":"DefineFeature F [#6]\n  Family Hydrophobe\n  Weights 1.0\nEndFeature\n","generator":"rdkit_fdef","types":["Hydrophobe","NegIonizable"]}

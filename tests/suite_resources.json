@@ -1,0 +1,344 @@
+{
+  "test_anchor.py": [],
+  "test_api.py": [
+    "TestScreenResult",
+    "TestScoreMatrix"
+  ],
+  "test_backend_boundary.py": [
+    "TestTheFrozenPairIndexContract::test_freezing_is_the_only_way_to_skip_it",
+    "TestTheQueryBound::test_an_oversized_query_is_refused_where_it_is_built",
+    "TestTheQueryBound::test_a_normal_query_is_nowhere_near_the_bound"
+  ],
+  "test_backend_seam.py": [],
+  "test_bench_clocks.py": [],
+  "test_bench_cpu.py": [],
+  "test_bench_gpu_lock.py": [
+    "TestRealNvidiaSmiCuda"
+  ],
+  "test_bench_gpu_run.py": [],
+  "test_bench_metal.py": [],
+  "test_bench_rules.py": [],
+  "test_catalog.py": [],
+  "test_cmake_arch_discovery.py": [],
+  "test_codec_fixtures.py": [],
+  "test_color_census.py": [],
+  "test_color_conformer_kernel.py": [],
+  "test_color_contract.py": [
+    "TestTheCudaAnalyticPathIsCrossChecked"
+  ],
+  "test_color_coordinate_comparison.py": [],
+  "test_color_exact_final.py": [],
+  "test_color_field_cuda.py": [
+    "TestTheFieldPathCarriesColor",
+    "TestTheLaneAssignmentAndResidencyStillApply",
+    "TestThePerPlaneColorField"
+  ],
+  "test_color_invariant_plan.py": [],
+  "test_color_loop_cuda.py": [
+    "*"
+  ],
+  "test_color_path_cuda.py": [
+    "*"
+  ],
+  "test_color_plane_order.py": [],
+  "test_color_staging_cuda.py": [
+    "*"
+  ],
+  "test_color_view.py": [],
+  "test_cpu_arithmetic_is_checked.py": [],
+  "test_cpu_color_build_option.py": [],
+  "test_cpu_color_compatible_pairs.py": [],
+  "test_cpu_color_conformer_grains.py": [],
+  "test_cpu_color_field_sampling.py": [],
+  "test_cpu_color_fp32_dispatch_stamp.py": [],
+  "test_cpu_color_grain_requests.py": [],
+  "test_cpu_color_seam.py": [],
+  "test_cpu_color_start_lanes.py": [],
+  "test_cpu_color_torque_factoring.py": [],
+  "test_cpu_combo_executor.py": [],
+  "test_cpu_combo_self_overlaps.py": [],
+  "test_cpu_combo_threads.py": [],
+  "test_cpu_executor_indexed_rows.py": [],
+  "test_cpu_field_gradient_scale.py": [],
+  "test_cpu_field_knobs_are_honored.py": [],
+  "test_cpu_final_rescore_modes.py": [],
+  "test_cpu_grade_is_independent_of_cuda.py": [],
+  "test_cpu_kernel.py": [],
+  "test_cpu_library_coordinate_layouts.py": [],
+  "test_cpu_native_signature.py": [],
+  "test_cpu_neon_screening.py": [],
+  "test_cpu_numbers_are_graded.py": [],
+  "test_cpu_optimizer_exp_modes.py": [],
+  "test_cpu_optimizer_exp_unclamped.py": [],
+  "test_cpu_platform.py": [],
+  "test_cpu_port_benchmark.py": [],
+  "test_cpu_public_combo_exact_defaults.py": [],
+  "test_cpu_public_fast_defaults.py": [],
+  "test_cpu_public_final_start_policy.py": [],
+  "test_cpu_query_portable.py": [],
+  "test_cpu_raw_pose_contract.py": [],
+  "test_cpu_retained_query_field.py": [],
+  "test_cpu_scalar_color.py": [],
+  "test_cpu_scalar_combo.py": [],
+  "test_cpu_scan_progress.py": [],
+  "test_cpu_self_overlap_diagnostics.py": [],
+  "test_cpu_shape_batch_tail.py": [],
+  "test_cpu_shared_pose_all_grains.py": [],
+  "test_cpu_shared_pose_contract.py": [],
+  "test_cpu_static_color_field_policy.py": [],
+  "test_cpu_winner_only_final.py": [],
+  "test_cpu_worker_local_topk.py": [],
+  "test_cpu_worker_owned_scan.py": [],
+  "test_cpu_worker_pool_threads.py": [],
+  "test_cpu_worker_public_optin.py": [],
+  "test_definitions.py": [],
+  "test_dense_launch_contract.py": [],
+  "test_dense_launch_cuda.py": [
+    "*"
+  ],
+  "test_dispatch_cells_cuda.py": [
+    "*"
+  ],
+  "test_engine.py": [
+    "TestConfig::test_the_budget_comes_from_the_device",
+    "TestScreen",
+    "TestFailureLeavesNothingBehind",
+    "TestStageTimingIsNotClobbered",
+    "TestMergingSinksInfersOnlyWhatIsSafe",
+    "TestColorSurvivesLaunchCoalescing"
+  ],
+  "test_engine_reaches_the_cpu_backend.py": [],
+  "test_enrichment.py": [],
+  "test_exp_map_field_cuda.py": [
+    "TestTheQuaternionStaysUnitByConstruction",
+    "TestTheFieldPathHonorsTheRuleItIsGiven",
+    "TestTheDefaultIsTheExponentialMapEverywhere::test_the_default_launch_computes_the_exp_map"
+  ],
+  "test_export_provenance.py": [],
+  "test_field_large_library_conformers.py": [],
+  "test_format.py": [],
+  "test_format3_builder_consumers.py": [
+    "test_gpu_builder_scores_match_reference"
+  ],
+  "test_format3_builder_cpu.py": [],
+  "test_format3_builder_simd_cpp.py": [],
+  "test_format3_codec_roundtrip.py": [],
+  "test_format3_combo_query_self.py": [],
+  "test_format3_consumer_integration.py": [],
+  "test_format3_cpu_binding_control.py": [],
+  "test_format3_cpu_block_timing.py": [],
+  "test_format3_cpu_source.py": [],
+  "test_format3_cpu_workers.py": [],
+  "test_format3_deep_parallel.py": [],
+  "test_format3_descriptor.py": [],
+  "test_format3_fix_round.py": [],
+  "test_format3_gpu_launch.py": [],
+  "test_format3_gpu_launch_sanitized.py": [],
+  "test_format3_gpu_source.py": [],
+  "test_format3_gpu_source_cuda.py": [
+    "*"
+  ],
+  "test_format3_native.py": [],
+  "test_format3_native_cpp.py": [],
+  "test_format3_native_self_binding.py": [],
+  "test_format3_prepared_gpu.py": [
+    "*"
+  ],
+  "test_format3_reference.py": [],
+  "test_format3_validator.py": [],
+  "test_format3_writer_reader.py": [],
+  "test_golden.py": [
+    "TestTheGoldenScoresAreReproduced",
+    "TestResultInvariantsHoldOnRealOutput"
+  ],
+  "test_isotopic_hydrogens_are_stripped.py": [],
+  "test_layout.py": [],
+  "test_library_atom_count_limit.py": [],
+  "test_lint_conventions.py": [],
+  "test_metal.py": [
+    "test_fixed_pose_against_independent_oracle",
+    "test_rescore_preserves_shape_search_and_context_reuse",
+    "test_device_topk_ties_large_ids_split_molecules",
+    "test_public_screen_dense_and_engine_reuse",
+    "test_prefiltered_field_values_and_gradients_against_differences",
+    "test_fast_exp2_is_search_only",
+    "test_failed_allocation_invalidates_cache_and_allows_retry",
+    "test_extreme_coordinates_never_convert_to_invalid_grid_indices",
+    "test_close_releases_query_buffer_references",
+    "test_native_texture_centres_interpolation_and_zero_borders",
+    "test_texture_optimizer_replay_multiquery_and_cache_lifetime",
+    "test_texture_limits_and_format_range_failure_are_recoverable",
+    "test_opt_in_kernel_profiling_preserves_results",
+    "test_engine_texture_options_are_owned_and_survive_close",
+    "test_diagonal_specialization_matches_existing_optimizer",
+    "test_factored_torque_has_accurate_final_scores_and_generic_fallback",
+    "test_factored_torque_handles_empty_feature_segments",
+    "test_factored_directed_color_against_nine_column_oracle",
+    "test_factored_torque_mixing_endpoints_and_zero_step",
+    "test_default_optimizer_policy_matches_explicit_specialization_and_keeps_control",
+    "test_color_range_detection_uses_height_and_dispatches_specialization",
+    "test_dense_color_planes_mixed_dispatch_cache_and_exact_final_scores",
+    "test_color_field_values_and_gradients_against_independent_gaussians",
+    "test_color_fields_general_matrix_budget_and_outside_bounds_fall_back",
+    "test_color_field_screen_configuration_and_failure_recovery",
+    "test_nonfinite_color_field_nodes_fail_explicitly_and_recover",
+    "test_default_half_fields_dispatch_and_explicit_policy_match",
+    "test_compact_color_bindings_and_split_dispatch_preserve_pairs_and_topk",
+    "test_shape_ensemble_over_128_splits_without_repeating_library_self",
+    "test_budget_limited_rows_use_separate_analytic_kernel"
+  ],
+  "test_metal_cli.py": [],
+  "test_metal_kernel_source.py": [],
+  "test_metal_quality_diagnosis.py": [],
+  "test_metrics.py": [],
+  "test_molecule_level.py": [],
+  "test_numerics.py": [],
+  "test_numerics_backends.py": [
+    "test_cuda_direct_shape_fixed_pose",
+    "test_cuda_production_sampler_measures_eight_fractional_bits",
+    "test_cuda_complete_fixed_pose_same_frame",
+    "test_cuda_field_complete_final_same_frame",
+    "test_cuda_field_optimizer_supported_scheduling"
+  ],
+  "test_numerics_bias.py": [
+    "test_cuda_directed_singleton_control"
+  ],
+  "test_numerics_binary_snapshot.py": [],
+  "test_numerics_color_bias.py": [
+    "test_cuda_directed_typed_color_control"
+  ],
+  "test_numerics_contracts.py": [],
+  "test_numerics_cpu_paths.py": [],
+  "test_numerics_cuda_field_winners.py": [
+    "*"
+  ],
+  "test_numerics_cuda_reduction.py": [
+    "*"
+  ],
+  "test_numerics_cuda_texture.py": [],
+  "test_numerics_cuda_winners.py": [
+    "*"
+  ],
+  "test_numerics_end_to_end.py": [
+    "@backend"
+  ],
+  "test_numerics_field_intervals.py": [
+    "test_native_gaussian_builders_and_bounded_full3D_samples"
+  ],
+  "test_numerics_field_optimizer.py": [],
+  "test_numerics_field_quality_math.py": [],
+  "test_numerics_field_quality_v2.py": [],
+  "test_numerics_fixtures.py": [],
+  "test_numerics_metal.py": [
+    "test_analytic_final_fixed_pose_same_frame",
+    "test_analytic_final_partition_determinism",
+    "test_native_direct_sampler",
+    "test_field_dispatch_partition_shape_and_color"
+  ],
+  "test_numerics_metal_handoff.py": [],
+  "test_numerics_molecular_color_bias.py": [],
+  "test_numerics_multigpu.py": [
+    "*"
+  ],
+  "test_numerics_multigpu_lock.py": [],
+  "test_numerics_optimizer.py": [],
+  "test_numerics_optimizer_real.py": [
+    "test_live_real_optimizer_smoke",
+    "test_live_real_cuda_optimizer"
+  ],
+  "test_numerics_optimizer_supplement.py": [],
+  "test_numerics_qualification_separation.py": [],
+  "test_numerics_report.py": [],
+  "test_numerics_runner.py": [],
+  "test_numerics_shape_mean.py": [
+    "test_native_cuda_arbitrary_coordinate_shape_mean"
+  ],
+  "test_numerics_xdist.py": [],
+  "test_optimizer.py": [],
+  "test_optimizer_qualification_lane.py": [],
+  "test_pack_into.py": [],
+  "test_pharmacophore.py": [],
+  "test_planar_tile_cuda.py": [
+    "*"
+  ],
+  "test_prep.py": [],
+  "test_prepare.py": [
+    "TestScreenAgainstABuiltCorpus"
+  ],
+  "test_prepare_conformer_ids.py": [],
+  "test_prepare_console_privacy.py": [],
+  "test_prepare_content_order.py": [],
+  "test_prepare_feature_table.py": [],
+  "test_prepare_format3.py": [],
+  "test_prepare_id_reference.py": [],
+  "test_prepare_manifest_stats.py": [],
+  "test_prepare_perceive_stored_smiles.py": [],
+  "test_prepare_progress.py": [],
+  "test_prepare_reconcile_durable.py": [],
+  "test_prepare_resume.py": [],
+  "test_prepare_self_sidecars.py": [],
+  "test_prepare_smiles_roundtrip.py": [],
+  "test_prepare_worker_death.py": [],
+  "test_public_cpu_screen_session.py": [],
+  "test_public_cpu_worker_modes.py": [],
+  "test_query_wire_grid.py": [
+    "test_the_analytic_kernel_scores_one_query_coordinate_set",
+    "test_direct_off_grid_query_self_uses_the_scored_wire_frame",
+    "test_cpu_and_cuda_receive_the_same_query_array"
+  ],
+  "test_rdkit_binary_source.py": [],
+  "test_reduced_pose_color_cpp.py": [],
+  "test_reference.py": [
+    "TestKernelAgainstTheReference",
+    "TestTheKernelColorTermAgainstTheOracle"
+  ],
+  "test_release_version_check.py": [],
+  "test_rsb3_source_group_subset.py": [],
+  "test_run_kinds.py": [],
+  "test_run_record_no_gpu.py": [],
+  "test_screen_mode_contracts.py": [],
+  "test_screening_regression.py": [],
+  "test_sdf_merge_conformers.py": [],
+  "test_sdf_merge_stereo_guard.py": [],
+  "test_search_values_only.py": [],
+  "test_self_overlap_bound_cuda.py": [
+    "*"
+  ],
+  "test_self_overlap_routes.py": [],
+  "test_shape_denominator_guards_cuda.py": [
+    "*"
+  ],
+  "test_shape_field_evaluator.py": [],
+  "test_shared_cache.py": [],
+  "test_sidecar_receipts.py": [],
+  "test_source_stamp.py": [],
+  "test_source_stamp_without_git.py": [],
+  "test_sqlite_source.py": [],
+  "test_staging_policy.py": [
+    "TestTheLauncherAcceptsWhatThePolicyChose",
+    "test_the_engine_tells_the_policy_which_panel_it_is_screening"
+  ],
+  "test_start_groups_field_cuda.py": [
+    "*"
+  ],
+  "test_start_rotation_cuda.py": [
+    "TestGuardIsOnTheLaunchPath"
+  ],
+  "test_suite_runner.py": [],
+  "test_t297_builder_integration.py": [],
+  "test_t297_results_identity.py": [],
+  "test_tanimoto_denominator_guard.py": [],
+  "test_update_rule_cuda.py": [
+    "*"
+  ],
+  "test_version.py": [],
+  "test_web.py": [
+    "test_cuda_screen_overlay_and_exports",
+    "@backend"
+  ],
+  "test_web_progress.py": [],
+  "test_wire_record_cuda.py": [
+    "*"
+  ],
+  "test_worker_local_topk_exactness.py": []
+}

@@ -1,0 +1,70 @@
+[build-system]
+requires = ["scikit-build-core>=0.10", "pybind11>=2.12"]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "roshambo3"
+version = "1.0.0"
+description = "Ultra-scale 3D molecular shape screening on GPUs"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: C++",
+    "Topic :: Scientific/Engineering :: Chemistry",
+]
+dependencies = [
+    "numpy",
+    "scipy",
+    "rdkit",
+    "pyarrow>=15",
+    "zstandard>=0.25.0",
+    "tqdm",
+]
+
+[project.optional-dependencies]
+pandas = ["pandas"]
+web = ["fastapi>=0.115,<1", "uvicorn>=0.30,<1", "python-multipart>=0.0.20"]
+
+[project.scripts]
+roshambo3 = "roshambo3.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/kimiatx-oss/roshambo3"
+Repository = "https://github.com/kimiatx-oss/roshambo3"
+Paper = "https://github.com/kimiatx-oss/roshambo3-paper"
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "psutil",
+    "pytest-xdist>=3.8",
+    "filelock>=3.13",
+    "httpx>=0.27",  # fastapi.testclient (web tests); they skip without it
+]
+
+[tool.scikit-build]
+minimum-version = "build-system.requires"
+build-dir = "build/{wheel_tag}"
+wheel.packages = ["src/roshambo3"]
+sdist.exclude = ["build/**", "dist/**", "web/node_modules/**", "web/test-results/**",
+    "web/playwright-report/**", "publication/build/**", "publication/generated/**", "**/__pycache__/**",
+    "results/apple-silicon/**", "results/metal/**"]
+cmake.version = ">=3.24"
+
+[tool.scikit-build.cmake.define]
+# CUDA is optional: CMake probes for it with check_language(CUDA) and builds the
+# pure-CPU package when no toolkit is present. The CI's cpu job asserts this.
+ROSHAMBO3_CUDA = "AUTO"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# Tests must run from anywhere. ROSHAMBO2's suite was cwd-sensitive and CI had to
+# set working-directory: test to make it pass.
+addopts = "-q"
+# `bench/` is dev-only and deliberately not installed, but its rules are tested.
+# Putting the repo root on the path here is what lets those tests import it
+# without a sys.path hack -- the same hack the metrics port existed to remove.
+pythonpath = ["."]

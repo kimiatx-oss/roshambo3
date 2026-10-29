@@ -1,0 +1,31 @@
+name: Apple GPU validation
+on: workflow_dispatch
+jobs:
+  metal:
+    runs-on: [self-hosted, macOS, ARM64, metal]
+    env:
+      ROSHAMBO3_REQUIRE_METAL: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11"}
+      - run: python -m pip install build pybind11 scikit-build-core pytest psutil httpx "pytest-xdist>=3.8" "filelock>=3.13"
+      - run: python -m build --wheel --no-isolation --config-setting=cmake.define.ROSHAMBO3_CUDA=OFF --config-setting=cmake.define.ROSHAMBO3_METAL=ON
+      - run: |
+          wheels=(dist/*.whl)
+          python -m pip install "${wheels[0]}[web]"
+      - run: python -m pytest tests/test_metal.py tests/test_metal_cli.py tests/test_web.py --numerics-profile cpu-cuda-metal --numerics-report-dir numerics-coverage --numerics-panel-stamp seeded-numerics-v1
+      - name: upload numerical coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: numerics-metal
+          path: numerics-coverage/
+          if-no-files-found: warn
+      - run: python -m pytest tests/test_numerics_metal.py tests/test_numerics_end_to_end.py --numerics-profile cpu-cuda-metal --numerics-panel-stamp numerics-panel-seed270-count5+3-fp32-v1 --numerics-report-dir numerics-metal --junitxml numerics-metal/junit.xml
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: metal-numerics-receipts
+          path: numerics-metal/
+          if-no-files-found: error

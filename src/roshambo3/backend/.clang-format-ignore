@@ -1,0 +1,5 @@
+# The CUDA sources keep their hand layout: the launch macros and instantiation
+# tables in kernels.cu are aligned by hand. This file lives here rather than in
+# _cuda_src/ because scripts/source_stamp.py hashes every file under _cuda_src/
+# into cuda_src_sha256, which a config file there would change.
+_cuda_src/*

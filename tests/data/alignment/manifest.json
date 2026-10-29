@@ -1,0 +1,97 @@
+{
+  "source": {
+    "url": "https://drugdesign.unistra.fr/LIT-PCBA/Files/full_data.tgz",
+    "retrieved": "2026-08-21T04:57:54Z",
+    "sha256": "93467a5b2a51d303ae7a5e84aa66aae7f371e0502adb006d24aa68905b2b9a7d"
+  },
+  "license": {
+    "status": "No explicit data redistribution license identified on source landing page",
+    "source_notice": "(c) Laboratoire d\u2019innovation Th\u00e9rapeutique",
+    "scope": "Tiny factual coordinate and molecule records attributed to public LIT-PCBA PDB templates; no paper text or figures reproduced",
+    "checked_url": "https://drugdesign.unistra.fr/LIT-PCBA/",
+    "checked_date": "2026-10-17"
+  },
+  "feature_policy": {
+    "rdkit_version": "2026.03.5",
+    "fdef": "RDKit BaseFeatures.fdef",
+    "fdef_sha256": "766f9790513f8f94c67ec6d1c8b6d5bede59b81f6da8c2081f57e49fb28d9784",
+    "hydrogens": "Retain source explicit H; shape uses only atomic number >1. No protonation, tautomerization, H addition, embedding or minimization. Features from source protonation and RDKit implicit H interpretation.",
+    "coordinates": "RDKit sanitized MOL2 converted to SDF; coordinate values retain four decimal places; center only at load time; no coordinate quantization before feature generation.",
+    "centroids": "Chemical typing and matched atom IDs from RDKit default BaseFeatures.fdef; selected weights must be uniform. Canonical positions use math.fsum(source atom coordinates)/count per Cartesian component, then subtract common heavy-atom fsum center. RDKit GetPos is separately checked against a derived fp64 rounding envelope."
+  },
+  "recipe": "PYTHONPATH=src:. python -m bench.numerics_fixtures --extract /path/to/full_data.tgz",
+  "molecules": [
+    {
+      "name": "ADRB2_3p0g",
+      "file": "ADRB2_3p0g.sdf",
+      "source_member": "ADRB2/3p0g_ligand.mol2",
+      "pdb_id": "3p0g",
+      "source_member_sha256": "a9d59df82d78c783e9128298a6f839f53e2bcb7af9be07a96ca8faa2886ef2a2",
+      "sha256": "1821f8f545a1d1add7379abf85cf59a1c320b749d040eb125b5e19c059f72de0",
+      "canonical_isomeric_smiles": "Cc1ccccc1CC(C)(C)[NH2+]C[C@H](O)c1ccc(O)c2c1OCC(=O)N2",
+      "heavy_atoms": 27,
+      "features": {
+        "Hydrophobe": 13,
+        "Acceptor": 4,
+        "Aromatic": 2,
+        "Donor": 4,
+        "PosIonizable": 1,
+        "NegIonizable": 0
+      }
+    },
+    {
+      "name": "ADRB2_3pds",
+      "file": "ADRB2_3pds.sdf",
+      "source_member": "ADRB2/3pds_ligand.mol2",
+      "pdb_id": "3pds",
+      "source_member_sha256": "c2ea3d838885cad662107d9f7cb58dd0fd788d12aa8be5f50cecb46151df121d",
+      "sha256": "67496a70bf1f6b0aa4b2510fa667a1161ea73c903c9d9d93763fdc969dced542",
+      "canonical_isomeric_smiles": "COc1cc(CC[NH2+]C[C@H](O)c2ccc(O)c3[nH]c(=O)ccc23)ccc1OCCCS",
+      "heavy_atoms": 31,
+      "features": {
+        "Hydrophobe": 13,
+        "Acceptor": 5,
+        "Aromatic": 3,
+        "Donor": 5,
+        "PosIonizable": 1,
+        "NegIonizable": 0
+      }
+    },
+    {
+      "name": "ADRB2_4ldl",
+      "file": "ADRB2_4ldl.sdf",
+      "source_member": "ADRB2/4ldl_ligand.mol2",
+      "pdb_id": "4ldl",
+      "source_member_sha256": "055f9e4d537ff2726b4800377ea436e3e93e95d308ceda8cba2543dc71492c40",
+      "sha256": "c1009499e4e7dc8047bd5517e2d872489f51187a5f9e431660b82f3dfdfe0a62",
+      "canonical_isomeric_smiles": "CC(C)(Cc1ccc(O)cc1)[NH2+]C[C@H](O)c1ccc(O)c(O)c1",
+      "heavy_atoms": 23,
+      "features": {
+        "Hydrophobe": 12,
+        "Acceptor": 4,
+        "Aromatic": 2,
+        "Donor": 5,
+        "PosIonizable": 1,
+        "NegIonizable": 0
+      }
+    },
+    {
+      "name": "ESR1_ant_5fqv",
+      "file": "ESR1_ant_5fqv.sdf",
+      "source_member": "ESR1_ant/5fqv_ligand.mol2",
+      "pdb_id": "5fqv",
+      "source_member_sha256": "7706e77c483fc3fc50da9cf66d97657b206c848675bf9e917f2b548b67b227cd",
+      "sha256": "15998b359b074b8eab732e0e915063cf3717461887802b2708aff2e5bb6bbbcc",
+      "canonical_isomeric_smiles": "Cc1cc2c(cc1O)CC[N@@H+](CC(C)C)[C@@H]2C1=CCC(/C=C/C(=O)[O-])=CC1",
+      "heavy_atoms": 27,
+      "features": {
+        "Hydrophobe": 18,
+        "Acceptor": 2,
+        "Aromatic": 1,
+        "Donor": 2,
+        "PosIonizable": 1,
+        "NegIonizable": 1
+      }
+    }
+  ]
+}

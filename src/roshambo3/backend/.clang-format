@@ -1,0 +1,92 @@
+# Layout for the native CPU (x86, ARM) and Metal sources under this directory.
+#
+# Layout only: every option below leaves the token stream unchanged. Include
+# order, comments and string literals are never rewritten, so a reformat cannot
+# move the arithmetic -- see doc/NUMERICS_POLICY.md. Run it through
+# scripts/format_native.py, which also handles .metal (not a suffix
+# clang-format recognizes); scripts/verify_layout_only.py proves a reformat
+# changed whitespace alone.
+#
+# Modeled on the hand-written CUDA host code: 4-space indent, 80 columns,
+# attached braces, two spaces before a trailing comment.
+---
+Language: Cpp
+BasedOnStyle: LLVM
+Standard: Latest
+IndentWidth: 4
+ContinuationIndentWidth: 4
+ColumnLimit: 80
+AccessModifierOffset: -4
+IndentCaseLabels: false
+NamespaceIndentation: None
+PointerAlignment: Left
+DerivePointerAlignment: false
+BreakBeforeBraces: Attach
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: WithoutElse
+AllowShortLoopsOnASingleLine: false
+AllowShortBlocksOnASingleLine: Never
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortLambdasOnASingleLine: Inline
+AlwaysBreakTemplateDeclarations: Yes
+BinPackArguments: true
+BinPackParameters: true
+AlignAfterOpenBracket: Align
+AlignEscapedNewlines: Left
+AlignTrailingComments: true
+SpacesBeforeTrailingComments: 2
+AlignOperands: Align
+SpaceBeforeParens: ControlStatements
+SeparateDefinitionBlocks: Always
+MaxEmptyLinesToKeep: 2
+KeepEmptyLinesAtTheStartOfBlocks: false
+SortIncludes: Never
+IncludeBlocks: Preserve
+ReflowComments: false
+BreakStringLiterals: false
+InsertBraces: false
+RemoveBracesLLVM: false
+FixNamespaceComments: false
+IndentPPDirectives: None
+---
+# runtime.mm: the same layout for Objective-C++.
+Language: ObjC
+BasedOnStyle: LLVM
+Standard: Latest
+ObjCBlockIndentWidth: 4
+IndentWidth: 4
+ContinuationIndentWidth: 4
+ColumnLimit: 80
+AccessModifierOffset: -4
+IndentCaseLabels: false
+NamespaceIndentation: None
+PointerAlignment: Left
+DerivePointerAlignment: false
+BreakBeforeBraces: Attach
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: WithoutElse
+AllowShortLoopsOnASingleLine: false
+AllowShortBlocksOnASingleLine: Never
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortLambdasOnASingleLine: Inline
+AlwaysBreakTemplateDeclarations: Yes
+BinPackArguments: true
+BinPackParameters: true
+AlignAfterOpenBracket: Align
+AlignEscapedNewlines: Left
+AlignTrailingComments: true
+SpacesBeforeTrailingComments: 2
+AlignOperands: Align
+SpaceBeforeParens: ControlStatements
+SeparateDefinitionBlocks: Always
+MaxEmptyLinesToKeep: 2
+KeepEmptyLinesAtTheStartOfBlocks: false
+SortIncludes: Never
+IncludeBlocks: Preserve
+ReflowComments: false
+BreakStringLiterals: false
+InsertBraces: false
+RemoveBracesLLVM: false
+FixNamespaceComments: false
+IndentPPDirectives: None
+...

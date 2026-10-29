@@ -1,0 +1,7 @@
+RDKit 2026.09.1, BSD-3-Clause (https://github.com/rdkit/rdkit)
+source  RDConfig.RDDataDir/BaseFeatures.fdef of the RDKit release above
+bytes   6794
+sha256  766f9790513f8f94c67ec6d1c8b6d5bede59b81f6da8c2081f57e49fb28d9784
+The text is shipped verbatim. Its hash is the corpus-format definition hash
+(doc/FORMAT.md section 10.3); allowlist.tsv lists it. Regenerate with
+scripts/definition_allowlist.py --write.

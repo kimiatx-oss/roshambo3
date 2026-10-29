@@ -1,0 +1,42 @@
+{
+  "version": 3,
+  "frozen_before_selection": "2026-10-17",
+  "selection": "Archive order, first three distinct canonical isomeric SMILES passing geometry and qualification, then first passing molecule that adds the missing feature families. No production scores.",
+  "objectives": [
+    "shape",
+    "combo"
+  ],
+  "mixing": 0.5,
+  "starts": 128,
+  "seed": 270,
+  "translation_start_angstrom": 2.0,
+  "optimizer": "scipy BFGS, six axis-angle/translation parameters, numerical central gradient, gtol=1e-8, maxiter=400",
+  "pose_neighborhood_rmsd_angstrom": 0.011732050807568877,
+  "score_uncertainty": "Derived per fixture: nonnegative fp64 overlap summation gamma_n plus 64 eps per term and guarded-Tanimoto sensitivity; coordinates in input SDF define exact problem. Exponential term assumption: <=2 ulp libm error. Stationarity certified by independently recomputed central gradient <=1e-6. Search incompleteness remains explicitly outside this arithmetic bound.",
+  "minimum_gap": "0.001, a design acceptance margin, not a fitted numerical tolerance",
+  "geometry": "centered heavy-atom singular-value ratio smallest/largest >= 0.08",
+  "qualification": "Self alignment; intended score 1 follows Cauchy-Schwarz. Every discovered stationary basin outside atom-index RMSD neighborhood must lie below intended optimum by minimum_gap + 2*score_uncertainty. Require >=4 intended-basin convergences. Reject incomplete optimizations and alternate equivalent rotations. Finite search is empirical evidence, not proof of global uniqueness.",
+  "data_budget": {
+    "total_bytes": 1048576,
+    "per_file_bytes": 262144
+  },
+  "central_gradient_step": 1e-05,
+  "stationarity_max_gradient": 1e-06,
+  "amendment": {
+    "preregistered": "2026-10-17 before amended searches",
+    "reason": "The former .25 A exclusion could contain distinct poses that violate the independent .01 A recovery design plus two endpoint nearest-grid errors. A .05-scale tetrahedron exposed this degeneracy.",
+    "derivation": "0.01 Angstrom recovery design + 2*sqrt(3)*0.0005 Angstrom endpoint half-grid displacement; no observed candidate score or gap enters this radius."
+  },
+  "gtol": 1e-08,
+  "maxiter": 400,
+  "translation_extent_angstrom": 16.0,
+  "nonplanarity_minimum": 0.08,
+  "minimum_gap_design": 0.001,
+  "centroid_amendment": {
+    "preregistered": "2026-10-17 before canonical-centroid searches",
+    "definition": "Feature position for the default uniform-weight BaseFeatures definitions is math.fsum(source atom coordinates)/number of matched atoms, independently in each Cartesian component. Shape centering uses the same deterministic fsum mean over heavy atoms. Feature positions are then translated by that common center. RDKit supplies chemical typing and matched atom IDs, not the numerical centroid.",
+    "reason": "Actual ARM RDKit2026.09.1 and x86 RDKit2026.03.5 have identical source/shape/feature IDs/types/fdef but5 aromatic centroids differ by at most1.4210854715202004e-14 Angstrom. Exact canonical content hashes remain mandatory.",
+    "rdkit_position_check": "Reject nonuniform selected fdef weights. Independently compare GetPos to canonical source centroid with absolute bound gamma(2*n+8)*max(1,maxabs source coordinates), u=2^-53, for normalized uniform-weight multiply/sum and canonical sum/division rounding. This is a semantic-roundoff check, never an approximate hash.",
+    "unchanged": "All128 starts, seed, optimizer settings, exclusion radius, gap design, stationarity and uncertainty acceptance remain unchanged."
+  }
+}

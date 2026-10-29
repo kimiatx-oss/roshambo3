@@ -1,0 +1,76 @@
+{
+  "kind": "Actual x86/ARM canonical input agreement; scientific input fingerprints, not expected production outputs",
+  "implementation_commit": "77b13f90",
+  "implementation_sha256": "13d1ffc5474248a1871540f9a7a3918740d840ae671e53d2491d094daabdf342",
+  "method": "Identical committed source evaluated as a temporary in-memory module on ARM against its actual RDKit and original source SDFs. No remote files changed.",
+  "records": [
+    {
+      "name": "ADRB2_3p0g",
+      "local_rdkit_version": "2026.03.5",
+      "arm_rdkit_version": "2026.09.1",
+      "exact_equal_semantic_fields": {
+        "source_sdf_sha256": "1821f8f545a1d1add7379abf85cf59a1c320b749d040eb125b5e19c059f72de0",
+        "source_member_sha256": "a9d59df82d78c783e9128298a6f839f53e2bcb7af9be07a96ca8faa2886ef2a2",
+        "shape_sha256": "4ffa47b9e0f8f5057758352e0b62c4c1443873c7971b097550f9e38fb39d6bfe",
+        "color_sha256": "9cf62f0f1724a5a6ca8f895c3f8ccc6c837ef879ed7f7a34b8f089e47ef7798b",
+        "types_sha256": "afd76d670ad39774c433d946e7b4f6602968aac724d48800bcd8d90301fe0617",
+        "interaction_r_sha256": "8ba3a83804a10545f533a5c951a2a76009172cac3c6060f6d63c94f922e7a445",
+        "interaction_p_sha256": "8ba3a83804a10545f533a5c951a2a76009172cac3c6060f6d63c94f922e7a445",
+        "feature_atom_ids_sha256": "1f955816873c8069751a51bce9e29ed067592921849971af1cec90e95bd4177d",
+        "fdef_sha256": "766f9790513f8f94c67ec6d1c8b6d5bede59b81f6da8c2081f57e49fb28d9784"
+      },
+      "separate_protocol_binding_note": "ARM source files still protocolv2 during probe; regenerated endpoint evidence will bind amended protocolv3."
+    },
+    {
+      "name": "ADRB2_3pds",
+      "local_rdkit_version": "2026.03.5",
+      "arm_rdkit_version": "2026.09.1",
+      "exact_equal_semantic_fields": {
+        "source_sdf_sha256": "67496a70bf1f6b0aa4b2510fa667a1161ea73c903c9d9d93763fdc969dced542",
+        "source_member_sha256": "c2ea3d838885cad662107d9f7cb58dd0fd788d12aa8be5f50cecb46151df121d",
+        "shape_sha256": "426527a4d89bd417e0505318dff9281dae62ef7ce8283ed5ced75dc857c3a9d7",
+        "color_sha256": "9cffc19cb304300fc7e917769c480dd2366e43f22a04eedc3b2bcc37b27910e9",
+        "types_sha256": "8d7892d425de374cc4549ccc00585edde1fc828616f9aa0e6ad678b67e8b26d1",
+        "interaction_r_sha256": "8ba3a83804a10545f533a5c951a2a76009172cac3c6060f6d63c94f922e7a445",
+        "interaction_p_sha256": "8ba3a83804a10545f533a5c951a2a76009172cac3c6060f6d63c94f922e7a445",
+        "feature_atom_ids_sha256": "5bae9b24147e0f2ea1b92c4178700e847360fafe1be8741782aaad4f34e0e4f1",
+        "fdef_sha256": "766f9790513f8f94c67ec6d1c8b6d5bede59b81f6da8c2081f57e49fb28d9784"
+      },
+      "separate_protocol_binding_note": "ARM source files still protocolv2 during probe; regenerated endpoint evidence will bind amended protocolv3."
+    },
+    {
+      "name": "ADRB2_4ldl",
+      "local_rdkit_version": "2026.03.5",
+      "arm_rdkit_version": "2026.09.1",
+      "exact_equal_semantic_fields": {
+        "source_sdf_sha256": "c1009499e4e7dc8047bd5517e2d872489f51187a5f9e431660b82f3dfdfe0a62",
+        "source_member_sha256": "055f9e4d537ff2726b4800377ea436e3e93e95d308ceda8cba2543dc71492c40",
+        "shape_sha256": "19f9f775b9a6e9f594ceeb6983242aa5d5fab0ab7e7c46661e881c7738e92577",
+        "color_sha256": "30b8e5fb4f9bfd57e126488288aea19aedf6efa06befaaaba8976346a93bfcaa",
+        "types_sha256": "3618b54538c31809facceb3fae999aa82bb9c24dcfc887af5c539de195c9a312",
+        "interaction_r_sha256": "8ba3a83804a10545f533a5c951a2a76009172cac3c6060f6d63c94f922e7a445",
+        "interaction_p_sha256": "8ba3a83804a10545f533a5c951a2a76009172cac3c6060f6d63c94f922e7a445",
+        "feature_atom_ids_sha256": "b0ccd9d41482c95ec66dab98cd275bb733c424b4abbd19ec665e5aafcac31533",
+        "fdef_sha256": "766f9790513f8f94c67ec6d1c8b6d5bede59b81f6da8c2081f57e49fb28d9784"
+      },
+      "separate_protocol_binding_note": "ARM source files still protocolv2 during probe; regenerated endpoint evidence will bind amended protocolv3."
+    },
+    {
+      "name": "ESR1_ant_5fqv",
+      "local_rdkit_version": "2026.03.5",
+      "arm_rdkit_version": "2026.09.1",
+      "exact_equal_semantic_fields": {
+        "source_sdf_sha256": "15998b359b074b8eab732e0e915063cf3717461887802b2708aff2e5bb6bbbcc",
+        "source_member_sha256": "7706e77c483fc3fc50da9cf66d97657b206c848675bf9e917f2b548b67b227cd",
+        "shape_sha256": "2a49da240251a1227a76eb5864802930ecef10a677ba34d7a02bd29fbfe830cd",
+        "color_sha256": "a14ae3cba21ca182682f4adfc05d7ecf469cdec7ae1caf38c5ec2057387812c3",
+        "types_sha256": "1cb85d5cf594bdf06f799e2e09b022d169ab21cd01d7e4bfd14cbbfd0a12361f",
+        "interaction_r_sha256": "8ba3a83804a10545f533a5c951a2a76009172cac3c6060f6d63c94f922e7a445",
+        "interaction_p_sha256": "8ba3a83804a10545f533a5c951a2a76009172cac3c6060f6d63c94f922e7a445",
+        "feature_atom_ids_sha256": "2233b56fba75aca286d05bb830612fd24018ea096e782a588ff98b88becd176e",
+        "fdef_sha256": "766f9790513f8f94c67ec6d1c8b6d5bede59b81f6da8c2081f57e49fb28d9784"
+      },
+      "separate_protocol_binding_note": "ARM source files still protocolv2 during probe; regenerated endpoint evidence will bind amended protocolv3."
+    }
+  ]
+}
