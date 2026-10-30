@@ -3,6 +3,8 @@ on: [push, pull_request]
 jobs:
   cpu:
     strategy:
+      # One platform failing must not cancel the others; each leg is evidence.
+      fail-fast: false
       matrix:
         os: [ubuntu-24.04, ubuntu-24.04-arm, macos-15]
     runs-on: ${{ matrix.os }}
@@ -53,8 +55,13 @@ jobs:
         with: {node-version: "22"}
       - run: npm ci
       - run: npm run build
+      # The served bundle is committed; it must be exactly what the source builds.
+      - run: git diff --exit-code -- ../src/roshambo3/web/static && test -z "$(git status --porcelain -- ../src/roshambo3/web/static)"
       - run: npx playwright install --with-deps chromium
       - run: npm test
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with: {name: playwright-results, path: web/test-results/, if-no-files-found: ignore}
 
   cpu-sanitized:
     name: sanitized format-3 CPU extension
@@ -135,7 +142,8 @@ jobs:
             -fno-omit-frame-pointer -I "$CPU_SRC" \
             tests/fuzz/r3g_libfuzzer.cpp \
             "$CPU_SRC/r3g_codec.cpp" "$CPU_SRC/r3g_unpack_scalar.cpp" \
-            "$CPU_SRC/r3g_encode.cpp" "$CPU_SRC/r3g_unpack_avx2.cpp" \
+            "$CPU_SRC/r3g_build_scalar.cpp" "$CPU_SRC/r3g_encode.cpp" \
+            "$CPU_SRC/r3g_unpack_avx2.cpp" "$CPU_SRC/r3g_build_avx2.cpp" \
             -o "$RUNNER_TEMP/r3g_libfuzzer" 2>&1 | tee fuzz-artifacts/native/build.log
       - name: run native codec target for 60 seconds
         run: |

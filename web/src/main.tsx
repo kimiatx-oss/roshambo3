@@ -29,6 +29,7 @@ type Hit = {
   rank: number;
   gid: string;
   mol_id: string;
+  conf_idx: number;
   name: string;
   query_index: number;
   shape: number;
@@ -276,7 +277,7 @@ function App() {
                   {!selected.overlays && (
                     <>
                       <br />
-                      Structure index unavailable; overlays are disabled.
+                      Molecule metadata unavailable; overlays are disabled.
                     </>
                   )}
                 </p>
@@ -551,7 +552,7 @@ function App() {
                           </td>
                           <td>
                             <strong>{h.name || h.mol_id}</strong>
-                            <small>Conformer {h.gid}</small>
+                            <small>Conformer {h.conf_idx}</small>
                           </td>
                           <td>{h.shape.toFixed(4)}</td>
                           <td>{h.color.toFixed(4)}</td>

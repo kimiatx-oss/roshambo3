@@ -16,6 +16,7 @@ test("prepare, screen, inspect and pin overlays, export", async ({ page }) => {
     rank: i + 1,
     gid: String(i),
     mol_id: String(i),
+    conf_idx: 0,
     query_index: 0,
     name: `Hit ${i + 1}`,
     shape: 0.95 - i * 0.01,
@@ -88,6 +89,7 @@ test("prepare, screen, inspect and pin overlays, export", async ({ page }) => {
   await expect(page.getByLabel("Representation")).toHaveValue("surface");
   await expect(page.getByTestId("molecular-viewer")).toHaveAttribute("data-surface-state", "ready");
   await expect(page.locator(".legend")).toContainText("gray surface + thin sticks");
+  await expect(page.getByRole("row").filter({ hasText: "Hit 1" })).toContainText("Conformer 0");
   await page.getByRole("row").filter({ hasText: "Hit 1" }).click();
   await expect(page.locator(".legend")).toContainText("Hit 1");
   await expect(page.getByText(/Query preview · first prepared conformer/)).toHaveCount(0);

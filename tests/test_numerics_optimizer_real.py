@@ -51,7 +51,12 @@ def live_control_module(tmp_path_factory):
     flags=shlex.split(cpu.build_stamp()['cxx_flags'].split('[')[0])
     # Python supplies Darwin's bundle/dynamic-lookup flags as well as Linux's
     # shared-library flag; raw -shared leaves Python symbols unresolved on macOS.
-    link_flags = shlex.split(sysconfig.get_config_var('LDSHARED'))[1:]
+    # A universal2 Python also lists `-arch arm64 -arch x86_64`, which would
+    # compile the arm64-only -march flags for x86_64 too; the instrument is
+    # loaded only by this interpreter, so it is built for this host alone.
+    ldshared = shlex.split(sysconfig.get_config_var('LDSHARED'))[1:]
+    link_flags = [f for i, f in enumerate(ldshared)
+                  if f != '-arch' and (i == 0 or ldshared[i - 1] != '-arch')]
     command=[os.environ.get('CXX','c++'),*flags,'-std=c++17',*link_flags,'-fPIC',
         '-I'+pybind11.get_include(),'-I'+sysconfig.get_path('include'),str(source),'-o',str(path)]
     subprocess.run(command,check=True)

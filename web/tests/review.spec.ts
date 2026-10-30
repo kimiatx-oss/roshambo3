@@ -14,7 +14,7 @@ const record = (id: string, state = "completed", submitted_conformers = 0) => ({
   total_conformers: 100, request: { database: id },
   preparation: { conformers: 1, warnings: [], molblock: mol },
 });
-const hit = (name: string) => ({ rank: 1, gid: "0", mol_id: "1", query_index: 0,
+const hit = (name: string) => ({ rank: 1, gid: "0", mol_id: "1", conf_idx: 0, query_index: 0,
   name, shape: 0.8, color: 0.8, combination: 0.8 });
 const databases = { databases: [{ id: "A", name: "A", modes: ["shape"], overlays: true }],
   limits: { max_k: 10000, max_conformers: 50, retention_days: 7 } };
